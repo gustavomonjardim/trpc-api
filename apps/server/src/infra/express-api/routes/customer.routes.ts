@@ -10,10 +10,10 @@ import { InputUpdateCustomerDto } from "../../../usecase/customer/update/update.
 export const customerRoute = express.Router();
 
 customerRoute.post("/", async (req: Request, res: Response) => {
-  const usecase = new CreateCustomerUseCase(new CustomerRepository());
   try {
+    const usecase = new CreateCustomerUseCase(new CustomerRepository());
     const customerDto: InputCreateCustomerDto = {
-      fullName: req.body.name,
+      fullName: req.body.full_name,
       documentNumber: req.body.document_number,
       email: req.body.email,
       phone: req.body.phone,
@@ -44,7 +44,7 @@ customerRoute.put("/:id", async (req: Request, res: Response) => {
   try {
     const customerDto: InputUpdateCustomerDto = {
       id: req.body.id,
-      fullName: req.body.name,
+      fullName: req.body.full_name,
       documentNumber: req.body.document_number,
       email: req.body.email,
       phone: req.body.phone,
