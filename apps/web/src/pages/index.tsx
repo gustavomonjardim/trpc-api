@@ -4,9 +4,9 @@ import { trpc } from "../trpc";
 
 export default function Web() {
   const fetchUser = async () => {
-    const user = await trpc.user.getUserById.query("0");
+    const customers = await trpc.customers.listCustomers.query();
 
-    console.log(user);
+    console.log(customers);
   };
 
   useEffect(() => {

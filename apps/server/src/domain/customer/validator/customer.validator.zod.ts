@@ -16,8 +16,19 @@ export default class CustomerZodValidator
         }),
         phone: z.string({ required_error: "phone is required" }),
       }).parse(entity);
-    } catch (errors) {
-      console.log(errors);
+    } catch (_errors) {
+      const errors = _errors as ZodError;
+
+      const initialObj: Record<string, string> = {};
+      const errorsObj = errors.issues.reduce((obj, error) => {
+        if (error.path?.[0] && !obj[error.path[0]]) {
+          const newObj = { ...obj, [error.path[0]]: error.message };
+          return newObj;
+        }
+        return obj;
+      }, initialObj);
+
+      throw new Error(JSON.stringify(errorsObj));
     }
   }
 }

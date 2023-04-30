@@ -20,8 +20,10 @@ customerRoute.post("/", async (req: Request, res: Response) => {
     };
     const output = await usecase.execute(customerDto);
     res.send(output);
-  } catch (err) {
-    res.status(500).send(err);
+  } catch (_err) {
+    const err = _err as Error;
+    console.log(err);
+    res.status(500).send(err.message);
   }
 });
 
