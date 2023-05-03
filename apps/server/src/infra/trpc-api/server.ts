@@ -2,7 +2,6 @@ import cors from "cors";
 import * as trpcExpress from "@trpc/server/adapters/express";
 
 import { appRouter } from "./routes/router";
-import { createContext } from "./trpc/context";
 import express, { Express } from "express";
 import { Sequelize } from "sequelize-typescript";
 import CustomerModel from "../customer/repository/sequelize/customer.model";
@@ -13,13 +12,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-app.use(
-  "/trpc",
-  trpcExpress.createExpressMiddleware({
-    router: appRouter,
-    createContext,
-  })
-);
+app.use("/trpc", trpcExpress.createExpressMiddleware({ router: appRouter }));
 
 export let sequelize: Sequelize;
 

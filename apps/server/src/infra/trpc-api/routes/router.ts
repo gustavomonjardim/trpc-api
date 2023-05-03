@@ -1,4 +1,4 @@
-import { router } from "../trpc/trpc";
+import { router } from "../trpc";
 import { customerRouter } from "./customer.routes";
 
 export const appRouter = router({

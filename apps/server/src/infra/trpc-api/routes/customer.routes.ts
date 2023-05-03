@@ -1,4 +1,5 @@
 import { z } from "zod";
+
 import { InputCreateCustomerDto } from "../../../usecase/customer/create/create.customer.dto";
 import CreateCustomerUseCase from "../../../usecase/customer/create/create.customer.usecase";
 import FindCustomerUseCase from "../../../usecase/customer/find/find.customer.usecase";
@@ -6,8 +7,7 @@ import ListCustomerUseCase from "../../../usecase/customer/list/list.customer.us
 import { InputUpdateCustomerDto } from "../../../usecase/customer/update/update.customer.dto";
 import UpdateCustomerUseCase from "../../../usecase/customer/update/update.customer.usecase";
 import CustomerRepository from "../../customer/repository/sequelize/customer.repository";
-
-import { router, publicProcedure } from "../trpc/trpc";
+import { router, publicProcedure } from "../trpc";
 
 export const customerRouter = router({
   listCustomers: publicProcedure.query(async () => {
@@ -15,19 +15,14 @@ export const customerRouter = router({
     const output = await usecase.execute({});
     return output;
   }),
-  getCustomerById: publicProcedure
-    .input((id: unknown) => {
-      if (typeof id === "string") return id;
-      throw new Error(`Invalid input: ${typeof id}`);
-    })
-    .query(async (req) => {
-      const { input } = req;
+  getCustomerById: publicProcedure.input(z.string()).query(async (req) => {
+    const { input } = req;
 
-      const usecase = new FindCustomerUseCase(new CustomerRepository());
-      const output = await usecase.execute({ id: input });
+    const usecase = new FindCustomerUseCase(new CustomerRepository());
+    const output = await usecase.execute({ id: input });
 
-      return output;
-    }),
+    return output;
+  }),
   createCustomer: publicProcedure
     .input(
       z.object({
