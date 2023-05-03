@@ -22,7 +22,6 @@ customerRoute.post("/", async (req: Request, res: Response) => {
     res.send(output);
   } catch (_err) {
     const err = _err as Error;
-    console.log(err);
     res.status(500).send(err.message);
   }
 });
@@ -36,7 +35,7 @@ customerRoute.get("/", async (req: Request, res: Response) => {
 
 customerRoute.get("/:id", async (req: Request, res: Response) => {
   const usecase = new FindCustomerUseCase(new CustomerRepository());
-  const output = await usecase.execute({ id: req.query.id as string });
+  const output = await usecase.execute({ id: req.params.id as string });
 
   res.send(output);
 });
@@ -45,7 +44,7 @@ customerRoute.put("/:id", async (req: Request, res: Response) => {
   const usecase = new UpdateCustomerUseCase(new CustomerRepository());
   try {
     const customerDto: InputUpdateCustomerDto = {
-      id: req.body.id,
+      id: req.params.id,
       fullName: req.body.full_name,
       documentNumber: req.body.document_number,
       email: req.body.email,
