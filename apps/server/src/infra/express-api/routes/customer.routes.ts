@@ -13,8 +13,8 @@ customerRoute.post("/", async (req: Request, res: Response) => {
   try {
     const usecase = new CreateCustomerUseCase(new CustomerRepository());
     const customerDto: InputCreateCustomerDto = {
-      fullName: req.body.full_name,
-      documentNumber: req.body.document_number,
+      fullName: req.body.fullName,
+      documentNumber: req.body.documentNumber,
       email: req.body.email,
       phone: req.body.phone,
     };
@@ -45,8 +45,8 @@ customerRoute.put("/:id", async (req: Request, res: Response) => {
   try {
     const customerDto: InputUpdateCustomerDto = {
       id: req.params.id,
-      fullName: req.body.full_name,
-      documentNumber: req.body.document_number,
+      fullName: req.body.fullName,
+      documentNumber: req.body.documentNumber,
       email: req.body.email,
       phone: req.body.phone,
     };

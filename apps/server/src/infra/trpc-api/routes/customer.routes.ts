@@ -31,9 +31,9 @@ export const customerRouter = router({
   createCustomer: publicProcedure
     .input(
       z.object({
-        full_name: z.string(),
+        fullName: z.string(),
         email: z.string(),
-        document_number: z.string(),
+        documentNumber: z.string(),
         phone: z.string(),
       })
     )
@@ -42,8 +42,8 @@ export const customerRouter = router({
 
       const usecase = new CreateCustomerUseCase(new CustomerRepository());
       const customerDto: InputCreateCustomerDto = {
-        fullName: input.full_name,
-        documentNumber: input.document_number,
+        fullName: input.fullName,
+        documentNumber: input.documentNumber,
         email: input.email,
         phone: input.phone,
       };
@@ -55,9 +55,9 @@ export const customerRouter = router({
     .input(
       z.object({
         id: z.string(),
-        full_name: z.string(),
+        fullName: z.string(),
         email: z.string(),
-        document_number: z.string(),
+        documentNumber: z.string(),
         phone: z.string(),
       })
     )
@@ -67,8 +67,8 @@ export const customerRouter = router({
       const usecase = new UpdateCustomerUseCase(new CustomerRepository());
       const customerDto: InputUpdateCustomerDto = {
         id: input.id,
-        fullName: input.full_name,
-        documentNumber: input.document_number,
+        fullName: input.fullName,
+        documentNumber: input.documentNumber,
         email: input.email,
         phone: input.phone,
       };

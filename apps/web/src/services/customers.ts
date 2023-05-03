@@ -19,8 +19,8 @@ export const createCustomer = async (data: {
   phone: string;
 }) => {
   const res = await axios.post(`${url}/customers`, {
-    full_name: data.fullName,
-    document_number: data.documentNumber,
+    fullName: data.fullName,
+    documentNumber: data.documentNumber,
     email: data.email,
     phone: data.phone,
   });
@@ -36,8 +36,8 @@ export const updateCustomer = async (data: {
   phone: string;
 }) => {
   const res = await axios.put(`${url}/customers/${data.id}`, {
-    full_name: data.fullName,
-    document_number: data.documentNumber,
+    fullName: data.fullName,
+    documentNumber: data.documentNumber,
     email: data.email,
     phone: data.phone,
   });
