@@ -1,15 +1,13 @@
-import axios from "axios";
-
-const url = "http://localhost:4000";
+import { trpc } from "../trpc";
 
 export const listCustomers = async () => {
-  const res = await axios.get(`${url}/customers`);
-  return res.data;
+  const data = await trpc.customers.listCustomers.query();
+  return data;
 };
 
 export const getCustomer = async ({ id }: { id: string }) => {
-  const res = await axios.get(`${url}/customers/${id}`);
-  return res.data;
+  const data = await trpc.customers.getCustomerById.query(id);
+  return data;
 };
 
 export const createCustomer = async (data: {
@@ -18,14 +16,14 @@ export const createCustomer = async (data: {
   documentNumber: string;
   phone: string;
 }) => {
-  const res = await axios.post(`${url}/customers`, {
-    fullName: data.fullName,
+  const res = await trpc.customers.createCustomer.mutate({
     documentNumber: data.documentNumber,
     email: data.email,
+    fullName: data.fullName,
     phone: data.phone,
   });
 
-  return res.data;
+  return res;
 };
 
 export const updateCustomer = async (data: {
@@ -35,12 +33,13 @@ export const updateCustomer = async (data: {
   documentNumber: string;
   phone: string;
 }) => {
-  const res = await axios.put(`${url}/customers/${data.id}`, {
-    fullName: data.fullName,
+  const res = await trpc.customers.updateCustomer.mutate({
+    id: data.id,
     documentNumber: data.documentNumber,
     email: data.email,
+    fullName: data.fullName,
     phone: data.phone,
   });
 
-  return res.data;
+  return res;
 };
