@@ -2,7 +2,8 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.js",
+  "main": "./index.ts",
+  "license": "MIT",
   "scripts": {
     "tsc": "tsc",
     "dev:express": "nodemon src/infra/express-api/index.ts",
@@ -11,7 +12,6 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
   "dependencies": {
     "@trpc/server": "^10.16.0",
     "cors": "^2.8.5",
